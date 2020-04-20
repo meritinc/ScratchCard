@@ -29,7 +29,7 @@ export function loadImage(src: string) {
 
 export function throttle (callback: Function, delay: number) {
   let last: number;
-  let timer: number;
+  let timer: any;
   return function () {
       let context = this;
       let now: number = +new Date();

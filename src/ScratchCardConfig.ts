@@ -22,5 +22,8 @@ export interface SC_CONFIG {
     png: string,
     poosition: number[]
   },
-  enabledPercentUpdate: boolean
+  enabledPercentUpdate: boolean,
+  soundScratchBegin: HTMLAudioElement,
+  soundScratchMid: HTMLAudioElement,
+  soundScratchEnd: HTMLAudioElement
 }

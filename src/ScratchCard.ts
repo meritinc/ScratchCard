@@ -17,6 +17,7 @@ class ScratchCard {
   private readyToClear: Boolean;
   private brush: Brush;
   private callbackDone: Boolean;
+  private playedStartSound: Boolean;
   public percent: number;
 
   constructor (selector: string, config: SC_CONFIG) {
@@ -37,6 +38,9 @@ class ScratchCard {
       htmlBackground: '',
       clearZoneRadius: 0,
       enabledPercentUpdate: true,
+      soundScratchBegin: HTMLAudioElement,
+      soundScratchMid: HTMLAudioElement,
+      soundScratchEnd: HTMLAudioElement,
     };
 
     this.config = {...defaults, ...config};
@@ -65,6 +69,11 @@ class ScratchCard {
     /*---- Scratching method , call in throttle event ------------------------------------*/
     let scratching = throttle((event: Event) => {
       event.preventDefault();
+      if (!this.playedStartSound) {
+        let sound = this.config.soundScratchMid;
+        sound.play();
+        this.playedStartSound = true;
+      }
       self.dispatchEvent('scratch', 'move');
       self.position = self.mousePosition(event);
       self.brush.updateMousePosition(self.position[0], self.position[1]);
