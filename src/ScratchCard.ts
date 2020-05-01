@@ -19,6 +19,7 @@ class ScratchCard {
   private callbackDone: Boolean;
   private playedStartSound: Boolean;
   public percent: number;
+  public finished: Boolean;
 
   constructor (selector: string, config: SC_CONFIG) {
     const self = this;
@@ -46,6 +47,7 @@ class ScratchCard {
     this.position = [0, 0]; // init position
     this.readyToClear = false;
     this.percent = 0;
+    this.finished = false;
     this.callbackDone = false;
 
     // Create and add the canvas
@@ -136,6 +138,14 @@ class ScratchCard {
   }
 
   /**
+   * Get state of scratchCard
+   * @returns {Boolean}
+   */
+  getFinished (): Boolean {
+    return this.finished;
+  }
+
+  /**
    * Return the top and left position
    * @private
    */
@@ -149,6 +159,7 @@ class ScratchCard {
     if (!this.callbackDone && this.percent > this.config.percentToFinish) {
       this.clear();
       this.canvas.style.pointerEvents = 'none';
+      this.finished = true;
       if (this.config.callback !== undefined) {
         this.callbackDone = true;
         this.config.callback();
