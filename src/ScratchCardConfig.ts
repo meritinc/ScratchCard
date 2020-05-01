@@ -23,7 +23,7 @@ export interface SC_CONFIG {
     poosition: number[]
   },
   enabledPercentUpdate: boolean,
-  soundScratchBegin: HTMLAudioElement,
-  soundScratchMid: HTMLAudioElement,
-  soundScratchEnd: HTMLAudioElement
+  soundScratchBegin?: HTMLAudioElement,
+  soundScratchMid?: HTMLAudioElement,
+  soundScratchEnd?: HTMLAudioElement
 }

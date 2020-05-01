@@ -38,9 +38,6 @@ class ScratchCard {
       htmlBackground: '',
       clearZoneRadius: 0,
       enabledPercentUpdate: true,
-      soundScratchBegin: HTMLAudioElement,
-      soundScratchMid: HTMLAudioElement,
-      soundScratchEnd: HTMLAudioElement,
     };
 
     this.config = {...defaults, ...config};
