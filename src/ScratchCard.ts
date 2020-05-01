@@ -70,13 +70,15 @@ class ScratchCard {
     let scratching = throttle((event: Event) => {
       let sound;
       event.preventDefault();
-      if (!this.playedStartSound) {
-        sound = this.config.soundScratchBegin;
+      if (this.config.soundScratchBegin) {
+        if (!this.playedStartSound) {
+          sound = this.config.soundScratchBegin;
+          sound.play();
+          this.playedStartSound = true;
+        }
+        sound = this.config.soundScratchMid;
         sound.play();
-        this.playedStartSound = true;
       }
-      sound = this.config.soundScratchMid;
-      sound.play();
       self.dispatchEvent('scratch', 'move');
       self.position = self.mousePosition(event);
       self.brush.updateMousePosition(self.position[0], self.position[1]);
@@ -97,9 +99,11 @@ class ScratchCard {
         self.canvas.removeEventListener('mousemove', scratching);
         self.finish(); // clear and callback
         this.removeEventListener('mouseup', _func);
-        self.playedStartSound = false;
-        let sound = self.config.soundScratchEnd;
-        sound.play();
+        if (self.config.soundScratchBegin) {
+          self.playedStartSound = false;
+          let sound = self.config.soundScratchEnd;
+          sound.play();
+        }
       });
     });
 
